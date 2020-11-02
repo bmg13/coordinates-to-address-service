@@ -21,5 +21,4 @@ public class GpsToAddressService {
         LOGGER.info("Retrieve location data for given coordinates. Latitude: {}, Longitude: {}", latitude, longitude);
         return this.requestDataFromExternalApiService.requestDataFromExternalApi(latitude, longitude);
     }
-
 }

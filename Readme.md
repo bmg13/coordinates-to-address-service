@@ -37,3 +37,5 @@ To test this service, follow the next steps.
 - https://www.latlong.net/
 
 - https://www.baeldung.com/rest-template
+
+- https://www.baeldung.com/spring-load-resource-as-string

@@ -1,9 +1,9 @@
 package coordinateService.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import coordinateService.builders.RequestBuilder;
 import coordinateService.config.MapServiceProperties;
+import coordinateService.converters.ResponseModelConverter;
 import coordinateService.models.LocationData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,15 +17,12 @@ public class RequestDataFromExternalApiService {
 
     private RestTemplate restTemplate;
     private MapServiceProperties mapServiceProperties;
-    private ObjectMapper objectMapper;
 
     public RequestDataFromExternalApiService(
             final RestTemplate restTemplate,
             final MapServiceProperties mapServiceProperties) {
         this.restTemplate = restTemplate;
         this.mapServiceProperties = mapServiceProperties;
-        this.objectMapper = new ObjectMapper();
-        this.objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
     }
 
     public LocationData requestDataFromExternalApi(
@@ -33,35 +30,15 @@ public class RequestDataFromExternalApiService {
             final String longitude) throws JsonProcessingException {
         ResponseEntity<String> response
                 = this.restTemplate.exchange(
-                this.buildRequestUrl(latitude, longitude),
+                RequestBuilder.buildRequestUrl(
+                        this.mapServiceProperties.getBaseUrl(),
+                        this.mapServiceProperties.getApiKey(),
+                        latitude,
+                        longitude),
                 HttpMethod.GET,
                 null,
                 String.class);
         LOGGER.info("Response: code: {}, body: {}", response.getStatusCodeValue(), response.getBody());
-        return convertResponseToModel(response.getBody());
-    }
-
-    private String buildRequestUrl(
-            final String latitude,
-            final String longitude) {
-        final StringBuilder requestUrl = new StringBuilder(this.mapServiceProperties.getBaseUrl());
-        requestUrl.append("?latlng=");
-        requestUrl.append(latitude);
-        requestUrl.append(",");
-        requestUrl.append(longitude);
-        requestUrl.append("&sensor=true&key=");
-        requestUrl.append(this.mapServiceProperties.getApiKey());
-        LOGGER.info("Request URL: {}", requestUrl.toString());
-        return requestUrl.toString();
-    }
-
-    private LocationData convertResponseToModel(final String response) throws JsonProcessingException {
-        LOGGER.info("About to convert response body.");
-        try {
-            return this.objectMapper.readValue(response, LocationData.class);
-        } catch (JsonProcessingException e) {
-            LOGGER.error("Error converting response body. {}", e.getMessage());
-            throw e;
-        }
+        return ResponseModelConverter.convertResponseToModel(response.getBody());
     }
 }
