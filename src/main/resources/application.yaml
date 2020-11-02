@@ -1,7 +1,7 @@
 common:
   api:
-    base-url: "http://maps.googleapis.com/maps/api/geocode/json"
-    api-key:
+    base-url: "https://maps.googleapis.com/maps/api/geocode/json"
+    api-key: ""
 server:
   port: 8083
   servlet:

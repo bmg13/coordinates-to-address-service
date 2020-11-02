@@ -1,5 +1,6 @@
 package coordinateService.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import coordinateService.models.LocationData;
 import coordinateService.services.GpsToAddressService;
 import org.slf4j.Logger;
@@ -29,7 +30,7 @@ public class GpsToAddressController {
     @GetMapping(path = "/location/latitude/{latitude}/longitude/{longitude}")
     public LocationData retrieveLocationData(
             @PathVariable String latitude,
-            @PathVariable String longitude) {
+            @PathVariable String longitude) throws JsonProcessingException {
         LOGGER.info("About to try to retrieve LocationData.");
         return this.gpsToAddressService.retrieveLocationDataFromGpsCoordinates(latitude, longitude);
     }

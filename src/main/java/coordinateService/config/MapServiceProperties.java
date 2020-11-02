@@ -1,17 +1,23 @@
 package coordinateService.config;
 
-// TODO: common.api
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotNull;
+
+@ConfigurationProperties("common.api")
+@Validated
 public class MapServiceProperties {
 
-    //@NotNull
+    @NotNull
     private String baseUrl;
-    //@NotNull
+    @NotNull
     private String apiKey;
 
-    public MapServiceProperties(){
+    public MapServiceProperties() {
     }
 
-    public MapServiceProperties(final String baseUrl, final String apiKey){
+    public MapServiceProperties(final String baseUrl, final String apiKey) {
         this.baseUrl = baseUrl;
         this.apiKey = apiKey;
     }

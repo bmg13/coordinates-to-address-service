@@ -1,5 +1,7 @@
 package coordinateService.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import coordinateService.config.MapServiceProperties;
 import coordinateService.models.LocationData;
@@ -23,11 +25,12 @@ public class RequestDataFromExternalApiService {
         this.restTemplate = restTemplate;
         this.mapServiceProperties = mapServiceProperties;
         this.objectMapper = new ObjectMapper();
+        this.objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
     }
 
     public LocationData requestDataFromExternalApi(
             final String latitude,
-            final String longitude) {
+            final String longitude) throws JsonProcessingException {
         ResponseEntity<String> response
                 = this.restTemplate.exchange(
                 this.buildRequestUrl(latitude, longitude),
@@ -52,9 +55,13 @@ public class RequestDataFromExternalApiService {
         return requestUrl.toString();
     }
 
-    private LocationData convertResponseToModel(final String response) {
-        final LocationData locationData = this.objectMapper.convertValue(response, LocationData.class);
-        LOGGER.info("Converted with success. {}", locationData);
-        return locationData;
+    private LocationData convertResponseToModel(final String response) throws JsonProcessingException {
+        LOGGER.info("About to convert response body.");
+        try {
+            return this.objectMapper.readValue(response, LocationData.class);
+        } catch (JsonProcessingException e) {
+            LOGGER.error("Error converting response body. {}", e.getMessage());
+            throw e;
+        }
     }
 }
