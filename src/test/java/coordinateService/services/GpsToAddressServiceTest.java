@@ -40,4 +40,11 @@ public class GpsToAddressServiceTest {
         verify(this.requestDataFromExternalApiService).requestDataFromExternalApi(anyString(), anyString());
         Assert.assertEquals(this.locationData, result);
     }
+
+    @Test(expected = JsonProcessingException.class)
+    public void retrieveLocationDataFromGpsCoordinatesExpectedJsonProcessingException() throws JsonProcessingException {
+        when(this.requestDataFromExternalApiService.requestDataFromExternalApi(anyString(), anyString()))
+                .thenThrow(JsonProcessingException.class);
+        this.gpsToAddressService.retrieveLocationDataFromGpsCoordinates(LATITUDE, LONGITUDE);
+    }
 }
