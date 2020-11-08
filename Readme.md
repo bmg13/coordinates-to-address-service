@@ -17,12 +17,12 @@ After small usage, the Google cloud platform allows the user to check the metric
 
 The next image exemplifies these metrics' dashboard.
 
-![Alt text](src\test\resources\images\GoogleGeocodeApiMetrics.PNG "Google Geocode API metrics.")
+![GoogleGeocodeApiMetrics](images/GoogleGeocodeApiMetrics.PNG "Google Geocode API metrics.")
 
 
 It is important to keep in mind that, as a good practice, restrictions should be guaranteed and control who can access the data with the cloud account.
 
-![Alt text](src\test\resources\images\GoogleGeocodeApiRestrictions.PNG "Google Geocode API restrictions.")
+![GoogleGeocodeApiRestrictions](images/GoogleGeocodeApiRestrictions.PNG "Google Geocode API restrictions.")
 
 
 ### Request 
@@ -76,7 +76,7 @@ Finally, the CtasCucumberTestSteps class has the test to be run with each specif
 
 To run the Cucumber tests, simply run the tests "normally" with the IDE tool or running mvn with any goal that runs the tests ("install", "test", etc.).
 
-![Alt text](src\test\resources\images\CtasCucumberTest.PNG "Ctas Cucumber test result.")
+![CtasCucumberTest](images/CtasCucumberTest.PNG "Ctas Cucumber test result.")
 
 
 ### Running with docker
