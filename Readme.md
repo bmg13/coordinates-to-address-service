@@ -1,4 +1,4 @@
-# Retrieve location data from coordinates using Google Maps API
+# Retrieve location data from coordinates using Google Maps API and using Cucumber to perform tests
 
 ## Description
 
@@ -6,8 +6,24 @@ The goal of this project is to retrieve data from a specific location using coor
 It is important to have a Google API key enabled to make requests to Google Maps API.
 As an additional implementation, unit tests were developed, with special focus in Cucumber, setting a scenario and creating valid tests to confirm the outcome of each step.
 
-### Get API key
-https://developers.google.com/maps/documentation/geocoding/get-api-key
+### Using Google GeoCode API
+
+First, once created a Google cloud account and a service, is it possible to get a API key in
+
+```https://developers.google.com/maps/documentation/geocoding/get-api-key```
+
+Once having one, it can be used in the request to the API.
+After small usage, the Google cloud platform allows the user to check the metrics, allowing to know the current cost, overall requests, usage, etc.
+
+The next image exemplifies these metrics' dashboard.
+
+![Alt text](src\test\resources\images\GoogleGeocodeApiMetrics.PNG "Google Geocode API metrics.")
+
+
+It is important to keep in mind that, as a good practice, restrictions should be guaranteed and control who can access the data with the cloud account.
+
+![Alt text](src\test\resources\images\GoogleGeocodeApiRestrictions.PNG "Google Geocode API restrictions.")
+
 
 ### Request 
 
@@ -26,7 +42,8 @@ To test this service, follow the next steps.
 - Confirm that the user has a Google API key enabled to Google Maps API (the key should be in the application.yaml)
 - Run the service
 - Send the request (with postman or curl, per example) like the following and confirm value
-    ```<INSERT_EXAMPLE_REQUEST_HERE>```
+   
+    ```http://localhost:8083/bmg13/gps-to-address-service/location/latitude/41.157944/longitude/-8.629105```
 
 
 ### Cucumber tests
@@ -59,7 +76,7 @@ Finally, the CtasCucumberTestSteps class has the test to be run with each specif
 
 To run the Cucumber tests, simply run the tests "normally" with the IDE tool or running mvn with any goal that runs the tests ("install", "test", etc.).
 
-![Alt text](src\test\resources\ctasCucumberTest.PNG?raw=true "Ctas Cucumber test result.")
+![Alt text](src\test\resources\images\CtasCucumberTest.PNG "Ctas Cucumber test result.")
 
 
 ### Running with docker
