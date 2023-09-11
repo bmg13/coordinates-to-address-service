@@ -13,8 +13,8 @@
 #FROM adoptopenjdk:11-jre-hotspot
 FROM openjdk:11
 MAINTAINER bmg13
-COPY target/coordinates-to-address-service-1.0-SNAPSHOT.jar coordinates-to-address-service-1.0-SNAPSHOT.jar
-ENTRYPOINT ["java","-jar","coordinates-to-address-service-1.0-SNAPSHOT.jar"]
+COPY target/coordinates-to-address-service-1.0-SNAPSHOT.war coordinates-to-address-service-1.0-SNAPSHOT.war
+ENTRYPOINT ["java","-jar","coordinates-to-address-service-1.0-SNAPSHOT.war"]
 #RUN target/coordinates-to-address-service-1.0-SNAPSHOT.jar
 #ENTRYPOINT ["mvn", "spring-boot:run"]
 #WORKDIR
