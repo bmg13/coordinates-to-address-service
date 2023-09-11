@@ -14,4 +14,8 @@
 FROM openjdk:11
 MAINTAINER bmg13
 COPY target/coordinates-to-address-service-1.0-SNAPSHOT.jar coordinates-to-address-service-1.0-SNAPSHOT.jar
-ENTRYPOINT ["java","-jar","/coordinates-to-address-service-1.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","coordinates-to-address-service-1.0-SNAPSHOT.jar"]
+#RUN target/coordinates-to-address-service-1.0-SNAPSHOT.jar
+#ENTRYPOINT ["mvn", "spring-boot:run"]
+#WORKDIR
+#CMD java CoordinatesToAddressApplication.java
