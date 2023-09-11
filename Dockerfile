@@ -14,4 +14,4 @@ FROM adoptopenjdk:11-jre-hotspot
 COPY /target/coordinates-to-address-service-1.0-SNAPSHOT.jar coordinates-to-address-service-1.0-SNAPSHOT.jar
 ENTRYPOINT ["mvn", "spring-boot:run "]
 MAINTAINER bmg13
-EXPOSE 8888
+EXPOSE 8888:8888
