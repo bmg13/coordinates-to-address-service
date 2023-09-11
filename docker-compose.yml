@@ -1,0 +1,6 @@
+version: '1'
+services:
+  coordinates-to-address-service:
+    build:
+      dockerfile: Dockerfile
+    image: result/latest
