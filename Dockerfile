@@ -10,7 +10,8 @@
              #COPY --from=builder spring-boot-loader/ ./
              #COPY --from=builder application/ ./armode=layertools -jar target/coordinates-to-address-service-1.0-SNAPSHOT.jar
 #MAINTAINER bmg13
-FROM adoptopenjdk:11-jre-hotspot
+#FROM adoptopenjdk:11-jre-hotspot
+FROM openjdk:8
 COPY /target/coordinates-to-address-service-1.0-SNAPSHOT.jar coordinates-to-address-service-1.0-SNAPSHOT.jar
 ENTRYPOINT ["mvn", "spring-boot:run "]
 MAINTAINER bmg13
